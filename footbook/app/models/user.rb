@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   after_initialize :default_values
 
+  def admin?
+    self.email == ADMIN_EMAIL
+  end
+
   private
 
   def default_values

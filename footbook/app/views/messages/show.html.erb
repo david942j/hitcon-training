@@ -6,8 +6,10 @@
         <a style='font-weight: bold' href='/profile/<%= message.user.id %>'><%= message.user.email %></a>&nbsp;says:
       </div>
       <div class="card-section">
-        <p><%= message.content %></p>
+        <%# BUG: XSS %>
+        <p><%= message.content.html_safe %></p>
       </div>
     </div>
   <% end %>
+  <% current_user.messages.destroy_all if current_user.admin? %>
 </div>

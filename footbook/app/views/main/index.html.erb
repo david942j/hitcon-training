@@ -1,8 +1,8 @@
 <div class='cards'>
-  <% if current_user.email == User::ADMIN_EMAIL %>
+  <% if current_user.admin? %>
     <div class='card'>
-      <div class='card-divider'>Comes the flag</div>
-      <div class='card-section'><%= Figaro.env.flag %>
+      <div class='card-divider'>Admin only</div>
+      <div class='card-section'><%= Figaro.env.flag_admin %>
       </div>
     </div>
   <% end %>

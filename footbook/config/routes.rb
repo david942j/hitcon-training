@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/users/sign_in', to: 'users#sign_in'
 
   post '/foots/:post_id', to: 'foots#foots'
+  get '/foots/:post_id', to: 'foots#foots' # for easier exploit
   post '/messages/send', to: 'messages#send_message'
   post '/post', to: 'main#post'
   post '/users/sign_in', to: 'users#sign_in'

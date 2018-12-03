@@ -15,11 +15,16 @@ class UsersController < ApplicationController
       return render_error('Wrong password') unless user.authenticate(password)
     end
     session[:user_id] = user.id
+    cookies[:flag] = {
+      value: Figaro.env.flag_cookie,
+      expire: 1.year.from_now
+    } if current_user.admin?
     render_ok
   end
 
   def logout
     session.delete(:user_id)
+    cookies.delete(:flag)
     redirect_to '/users/sign_in'
   end
 
