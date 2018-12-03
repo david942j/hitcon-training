@@ -34,3 +34,5 @@ Post.create(user_id: users[4].id, content: '@hacker what are you talking about?'
 
 post = Post.create(user_id: users[3].id, content: 'Meow, meow meow meow MEOW meow!')
 Foot.create(user_id: users[3].id, post_id: post.id)
+
+Secret.create(flag: Figaro.env.flag_db)
