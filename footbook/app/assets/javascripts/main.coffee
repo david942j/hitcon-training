@@ -45,8 +45,6 @@
       s = email.split('@')
       return null if s.length != 2
       [name, host] = s
-      idx = name.indexOf('+')
-      name = name[0...idx] if idx >= 0
       return null if name.length == 0
       return name + '@' + host
     $ '.send'

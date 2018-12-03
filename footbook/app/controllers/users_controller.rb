@@ -1,30 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :auth, only: %i[sign_in oauth]
-
-  def oauth
-    if auth_hash.provider.start_with?('dropbox')
-      auth_hash.info = User.info_of_dropbox(auth_hash.credentials.token)
-    end
-    email = auth_hash.info.email
-    email = User.trim_email(email) rescue nil
-    return redirect_to root_path if email.nil?
-    user = User.find_by_email(email)
-    if user.nil?
-      user = User.create({
-        account: SecureRandom.hex, password: SecureRandom.hex, email: email,
-        oauth: {
-          auth_hash.provider => auth_hash.info
-        }
-      })
-    else
-      if user.oauth[auth_hash.provider].nil?
-        user.oauth[auth_hash.provider] = auth_hash.info
-        user.save
-      end
-    end
-    session[:user_id] = user.id
-    redirect_to root_path
-  end
+  skip_before_action :auth, only: %i[sign_in]
 
   def sign_in
     return unless params[:account] && params[:password]
@@ -55,11 +30,5 @@ class UsersController < ApplicationController
     @liked = current_user.foots.pluck(:post_id).to_set
     @posts = @user.posts.common
     render template: 'main/index'
-  end
-
-  protected
-
-  def auth_hash
-    request.env['omniauth.auth']
   end
 end

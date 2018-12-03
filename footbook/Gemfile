@@ -62,11 +62,7 @@ gem 'foundation-rails', github: 'zurb/foundation-rails'
 gem 'database_cleaner'
 
 gem 'figaro'
-# oauth
-gem 'omniauth-twitter'
-gem 'omniauth-github'
-gem 'omniauth-dropbox-oauth2'
-gem 'dropbox_api'
+
 gem 'therubyracer'
 
 gem 'sprockets'

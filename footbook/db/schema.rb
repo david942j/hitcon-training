@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20170930050214) do
     t.string "account"
     t.string "email"
     t.string "password_digest"
-    t.text "oauth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account"], name: "index_users_on_account", unique: true
