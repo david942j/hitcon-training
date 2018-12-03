@@ -8,7 +8,7 @@ default: &default
   adapter: mysql2
   host: localhost
   username: footbook
-  encoding: utf8
+  encoding: utf8mb4
   password: <%= Figaro.env.database_password %>
   timeout: 5000
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

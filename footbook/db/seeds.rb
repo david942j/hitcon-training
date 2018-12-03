@@ -9,12 +9,12 @@
 DatabaseCleaner.clean_with(:truncation)
 
 password = SecureRandom.hex
-admin = User.create(account: 'admin', password: password, email: User::ADMIN_EMAIL)
+admin = User.create(account: 'admin', password: password)
 
 p password
 
 Post.create(user_id: admin.id, content: 'One flag is in my cookies, another one is for admin only: https://ppt.cc/f6hrGx')
-users = User.create(%w[ddaa aloha test meow david hacker].map { |n| { account: n, password: 'ddaa' + n, email: User.gen_email(n) } })
+users = User.create(%w[ddaa aloha test meow david hacker].map { |n| { account: n, password: 'ddaa' + n } })
 Post.create(user_id: users[1].id, content: 'Hey admin please give me some food!!!!!!')
 
 post = Post.create(user_id: users[3].id, content: 'Meow~ Meow~ Meow~ <3')

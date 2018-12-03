@@ -30,31 +30,23 @@
 
     $ '.reply'
       .click (e) ->
-        email = $(this).attr 'data-user-email'
+        account = $(this).attr 'data-user-account'
         $ '#message-modal'
         .foundation 'open'
         .find 'input'
-        .val email
+        .val account
         $ '#message-modal'
         .find 'textarea'
         .val('')
         .focus()
 
-    check_email = (email) ->
-      return null unless email.includes('@')
-      s = email.split('@')
-      return null if s.length != 2
-      [name, host] = s
-      return null if name.length == 0
-      return name + '@' + host
     $ '.send'
       .click (e) =>
-        email = check_email($('input[name="email"]').val())
+        account = $('input[name="account"]').val()
         content = $('textarea[name="content"]').val()
         return window.show_error('Write something!') if content.length == 0
-        return window.show_error('Too much..') if content.length > 1337
-        return window.show_error('Invalid email') unless email?
-        $.post '/messages/send', {email, content}, (resp) ->
+        return window.show_error('Too much..') if content.length >= 1024
+        $.post '/messages/send', {account, content}, (resp) ->
           return window.show_error(resp.data) if resp.status == 'ERROR'
           $ '#message-modal'
           .foundation 'close'

@@ -3,7 +3,7 @@
   <% @messages.each do |message| %>
     <div class="card">
       <div class="card-divider">
-        <a style='font-weight: bold' href='/profile/<%= message.user.id %>'><%= message.user.email %></a>&nbsp;says:
+        <a style='font-weight: bold' href='/profile/<%= message.user.id %>'><%= message.user.account %></a>&nbsp;says:
       </div>
       <div class="card-section">
         <%# BUG: XSS %>

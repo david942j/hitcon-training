@@ -42,12 +42,10 @@ ActiveRecord::Schema.define(version: 20170930050214) do
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "account"
-    t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account"], name: "index_users_on_account", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

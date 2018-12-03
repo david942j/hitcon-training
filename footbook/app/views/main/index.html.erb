@@ -19,7 +19,7 @@
   <% @posts.each do |post| %>
     <div class="card">
       <div class="card-divider">
-        <span>by&nbsp;</span><div data-user-id='<%= post.user.id %>'class='account'><%= post.user.email %></div>
+        <span>by&nbsp;</span><div data-user-id='<%= post.user.id %>'class='account'><%= post.user.account %></div>
       </div>
       <div class="card-section">
         <p><%= post['content'] %></p>
@@ -35,7 +35,7 @@
             <% end %>
           </span>
         </span>
-        <span data-user-email='<%= post.user.email %>' class='reply operator'></span>
+        <span data-user-account='<%= post.user.account %>' class='reply operator'></span>
       </div>
     </div>
   <% end %>
@@ -45,7 +45,7 @@
   <p class='lead'>
     <label>
       To:
-      <input name='email' type="text">
+      <input name='account' type="text">
     </label>
   </p>
   <textarea name='content' placeholder='Write something...'></textarea>

@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  ADMIN_EMAIL = 'admin@footbook.tw'.freeze
-
   has_secure_password validations: false
 
   has_many :posts
@@ -10,25 +8,11 @@ class User < ApplicationRecord
   after_initialize :default_values
 
   def admin?
-    self.email == ADMIN_EMAIL
+    self.id == 1
   end
 
   private
 
   def default_values
-  end
-
-  class << self
-    def gen_email(account)
-      account + '@user.footbook.tw'
-    end
-
-    def trim_email(email)
-      return nil unless email.is_a?(String)
-      name, host = email.split('@')
-      return nil unless name.is_a?(String) && host.is_a?(String)
-      return nil if name.empty? || host.empty?
-      name + '@' + host
-    end
   end
 end

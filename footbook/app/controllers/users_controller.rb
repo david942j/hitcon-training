@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     user = User.find_by_account(account)
     # sign up
     if user.nil?
-      user = User.create({ account: account, password: password, email: User.gen_email(account) })
+      user = User.create({ account: account, password: password })
     else
       return render_error('Wrong password') unless user.authenticate(password)
     end
