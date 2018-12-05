@@ -36,4 +36,13 @@ class UsersController < ApplicationController
     @posts = @user.posts.common
     render template: 'main/index'
   end
+
+  def settings
+    return if params[:password].nil?
+    password = params[:password].to_s
+    render_error('Invalid password') unless password.size.between?(1, 60)
+    current_user.password = password
+    current_user.save
+    render_ok
+  end
 end

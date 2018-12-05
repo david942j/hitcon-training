@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: 'main#index'
   get '/messages', to: 'messages#show'
   get '/profile/:id', to: 'users#profile'
+  get '/settings', to: 'users#settings'
+  post '/settings', to: 'users#settings'
   get '/users/logout', to: 'users#logout'
   get '/users/sign_in', to: 'users#sign_in'
 

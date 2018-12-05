@@ -16,9 +16,18 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
-window.show_error = function(msg) {
-  if(msg.length == 0) return;
-  var $obj = $('.callout.alert').text(msg).show();
+
+window.callout = (type, msg) => {
+  if(msg.length == 0) return false;
+  var $obj = $(`.callout.${type}`).text(msg).show();
   setTimeout(function() { $obj.fadeOut() }, 1000);
-  return false
+  return true
+}
+
+window.show_error = function(msg) {
+  return window.callout('alert', msg) && false
+}
+
+window.show_success = msg => {
+  window.callout('success', msg)
 }

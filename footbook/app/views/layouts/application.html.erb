@@ -21,6 +21,7 @@
         <div class="title-bar-left menu-text" onclick='location.href="/"'>Footbook</div>
         <div class="title-bar-right">
           <% if current_user %>
+            <a href='/settings' class='top-btn'>Settings</a>
             <a href='/messages' class='top-btn'>Messages</a>
             <a href='/users/logout' class='top-btn logout'>Logout</a>
           <% end %>
@@ -29,6 +30,7 @@
     </div>
     <%= yield %>
     <div style='display: none; z-index: 1006' class='fixed callout small alert'></div>
+    <div style='display: none; z-index: 1006' class='fixed callout small success'></div>
     <script>$(document).foundation()</script>
   </body>
 </html>

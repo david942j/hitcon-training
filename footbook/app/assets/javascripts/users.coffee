@@ -15,3 +15,14 @@
       $.post '/users/sign_in', { account, password }, (resp) =>
         return window.show_error(resp.data) if resp.status == 'ERROR'
         location.href = '/'
+
+@ChangeSetting =
+  bind: () ->
+    $ '.change-setting-button'
+      .click (e) ->
+        password = $('#password').val()
+        confirm = $('#_password').val()
+        return window.show_error 'Invalid password' if password.length == 0 or password.length > 60 or password != confirm
+        $.post '/settings', { password }, (resp) =>
+          return window.show_error(resp.data) if resp.status == 'ERROR'
+          window.show_success('OK!')
