@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     redirect_to '/users/sign_in' if current_user.nil?
   end
 
+  def admin
+    raise ActionController::RoutingError, 'Not Found' unless current_user.admin?
+  end
+
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end

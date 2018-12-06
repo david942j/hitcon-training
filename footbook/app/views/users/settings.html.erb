@@ -1,6 +1,6 @@
 <div class='grid-container' style='padding-top: 40px'>
   <div class='small-offset-4 small-4'>
-    <form action='settings' method='post'>
+    <form action='/settings' method='post'>
       <label>Change Password
         <input name="password" type="password" placeholder="Enter a password..." size="70" id="password"/>
       </label>
@@ -9,6 +9,13 @@
       </label>
       <div class='button change-setting-button'>Submit</div>
     </form>
+    <% if current_user.admin? %>
+      <%= form_for :favicon, url: '/upload' do |f| %>
+        <%= f.label 'Favicon upload' %>
+        <%= f.file_field :image, accept: 'image/jpeg' %>
+        <%= f.submit('Save', class: 'button') %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 <script>this.ChangeSetting.bind()</script>

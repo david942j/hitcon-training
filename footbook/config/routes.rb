@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   post '/messages/send', to: 'messages#send_message'
   post '/post', to: 'main#post'
   post '/users/sign_in', to: 'users#sign_in'
+
+  post '/upload', to: 'users#upload'
 end

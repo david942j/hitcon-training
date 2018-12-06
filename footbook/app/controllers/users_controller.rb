@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :auth, only: %i[sign_in]
+  before_action :admin, only: :upload
 
   def sign_in
     return unless params[:account] && params[:password]
@@ -44,5 +45,13 @@ class UsersController < ApplicationController
     current_user.password = password
     current_user.save
     render_ok
+  end
+
+  def upload
+    filepath = params[:favicon][:image].tempfile.path rescue nil
+    return render inline: 'image plz' if filepath.nil?
+    # Too lazy to install gems..
+    system('/home/footbook/footbook/bin/convert', '-resize', '128x128', filepath, '/home/footbook/footbook/app/assets/images/footbook.ico')
+    redirect_back(fallback_location: root_path)
   end
 end
